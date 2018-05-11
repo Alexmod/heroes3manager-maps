@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Инфо</title>
+  </head>
+
+
+
+  <body>
+
+
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4>Информация о карте</h4>
+    </div>     <!-- /modal-header -->
+    <div class="modal-body">
+
+      <p><b>Версия:</b> {{ info.get('Version') }}</p>
+      <p><b>Название:</b>  {{ info.get('name') }}</p>
+      <p><b>Кодировка:</b>  {{ info.get('encode') }}</p>
+      <p><b>Размер карты:</b>  {{ info.get('mapsize') }}</p>
+      <p><b>Подземелье:</b>  {{ info.get('underground') }}</p>
+      <p><b>Сложность:</b>  {{ info.get('difficulty') }}</p>
+      <p><b>Описание:</b>  {{ info.get('descr') }}</p>
+
+      <hr>
+      {% if info.get('last_game') and info.get('status') != 'Не играл' %}
+        <p><b>Дата последней игры:</b> {{ info.get('last_game') }}</p>
+      {% endif %}
+      {% import "bootstrap/wtf.html" as wtf %}
+      {{ wtf.quick_form(form,  action="/set/map/", button_map={'submit':'success', 'delmap': 'danger'}) }}
+
+
+
+    </div>     <!-- /modal-body -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+    </div>     <!-- /modal-footer -->
+  </body>
+</html>

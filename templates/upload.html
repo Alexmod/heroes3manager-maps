@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block title %}Главная страница карт{% endblock %}
+{% block body %}
+
+  <script>
+    $(document).ready(function(){
+      $('#MediaGif').hide();
+      $('#myForm').submit(function(e) {
+        $('#resultAjax').html('');
+        $('#myForm').hide();
+        $('#MediaGif').show();
+        $.ajax({
+          url: '/upload/post/multi/_ajax',
+          type: 'POST',
+          data: new FormData(this),
+          processData: false,
+          contentType: false,
+          success: function(result) {
+            var json_result = '<pre>' + result + '</pre>';
+            $("#resultAjax").append(json_result);
+            var form = document.getElementById("myForm");
+            form.reset();
+            $('#myForm').show();
+            $('#MediaGif').hide();
+          }
+        });
+        e.preventDefault();
+      });
+    });
+  </script>
+
+  <div class="page-header">
+    <h1>Загрузка новых карт на сервер</h1>
+  </div>
+  <form id="myForm">
+    <input id="inputFile" name="file[]" size="20" multiple="true" type="file" value="Browse" class="btn btn-default" style="display:inline;margin:10px" accept=".h3m" required>
+    <button class="btn btn-primary">Загрузить</button>
+  </form>
+
+  <div class="media" id="MediaGif">
+    <span class="media-left">
+      <img src="/static/ajax-loader.gif" alt="...">
+    </span>
+    <div class="media-body">
+      <h3 class="media-heading">Подождите! Идет загрузка новых карт в каталог ...</h3>
+    </div>
+  </div>
+
+
+  <span id="resultAjax"></span>
+
+{% endblock %}
