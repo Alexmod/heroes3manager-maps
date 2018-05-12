@@ -1,0 +1,19 @@
+version: '3'
+services:
+  flask:
+    build: .
+    links:
+      - mongo
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongo
+    command: python main.py
+
+  mongo:
+    image: mongo:3.6
+    volumes:
+      - ./db:/data/db
+    ports:
+      - 27017:27017
+
