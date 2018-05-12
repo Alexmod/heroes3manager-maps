@@ -1,0 +1,21 @@
+version: '3'
+services:
+  flask:
+    build: .
+    links:
+      - mongo
+    ports:
+      - 8000:80
+    volumes:
+      - ./static/Maps:/usr/src/app/static/Maps
+    depends_on:
+      - mongo
+    command: /usr/local/bin/gunicorn -w 2 -b :80 main:app
+
+  mongo:
+    image: mongo:3.6
+    volumes:
+      - ./db:/data/db
+    ports:
+      - 27017:27017
+

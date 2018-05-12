@@ -12,6 +12,7 @@ import shutil
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = '632dc6a1-5fef-^&%&*JH4aba-b944-e873ff61b76f'
+app.config['MONGO_HOST'] = 'mongo'
 app.config['MONGO_DBNAME'] = 'heroesmap'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 mongo = PyMongo(app)
@@ -117,5 +118,5 @@ def upload_post_multi():
 
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run(host='0.0.0.0')
+    # app.debug = True
+    app.run(host='0.0.0.0', port=80)
