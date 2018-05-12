@@ -14,8 +14,6 @@ services:
 
   mongo:
     image: mongo:3.6
-    volumes:
-      - ./db:/data/db
     ports:
       - 27017:27017
 
