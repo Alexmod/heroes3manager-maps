@@ -5,12 +5,12 @@ services:
     links:
       - mongo
     ports:
-      - 5000:5000
+      - 8000:80
     volumes:
       - ./static/Maps:/usr/src/app/static/Maps
     depends_on:
       - mongo
-    command: python main.py
+    command: /usr/local/bin/gunicorn -w 2 -b :80 main:app
 
   mongo:
     image: mongo:3.6

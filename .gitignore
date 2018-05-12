@@ -104,7 +104,7 @@ venv.bak/
 .mypy_cache/
 
 # Ignore uploaded maps
-static/Maps
+static/Maps/*
 !static/Maps/*.txt
 # Ignore database files
 db/
